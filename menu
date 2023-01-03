@@ -1,0 +1,77 @@
+#!/bin/bash
+clear
+echo -e "\e[36m╒════════════════════════════════════════════╕\033[0m"
+echo -e " \E[0;41;36m                 INFO SERVER                \E[0m"
+echo -e "\e[36m╘════════════════════════════════════════════╛\033[0m"
+uphours=`uptime -p | awk '{print $2,$3}' | cut -d , -f1`
+upminutes=`uptime -p | awk '{print $4,$5}' | cut -d , -f1`
+uptimecek=`uptime -p | awk '{print $6,$7}' | cut -d , -f1`
+cekup=`uptime -p | grep -ow "day"`
+IPVPS=$(curl -s ipinfo.io/ip )
+ISPVPS=$( curl -s ipinfo.io/org )
+#clear
+if [ "$cekup" = "day" ]; then
+echo -e "System Uptime   :  $uphours $upminutes $uptimecek"
+else
+echo -e "System Uptime   :  $uphours $upminutes"
+fi
+echo -e "IP-VPS          :  $IPVPS"
+echo -e "ISP-VPS         :  $ISPVPS"
+echo -e "\e[36m╒════════════════════════════════════════════╕\033[0m"
+echo -e " \E[0;41;36m                   XRAY MENU                \E[0m"
+echo -e "\e[36m╘════════════════════════════════════════════╛\033[0m"
+echo ""
+echo "║ 1. Cek Key "
+echo "║ 2. Cek Nama Domain "
+echo "║ 3. Cek IP Publik "
+echo "║ 4. Restart Xray Service "
+echo "║ 5. Update Cert "
+echo "║ 6. Reboot VPS "
+echo "║ 7. Keluar Dari Menu "
+echo "║ 8. Cek Port "
+echo "║ 9. Ganti Domain "
+echo "║10. Ganti Password VPS "
+echo ""
+echo -e "\e[36m╘════════════════════════════════════════════╛\033[0m"
+echo -e "\e[36m╒════════════════════════════════════════════╕\033[0m"
+echo -e " \E[0;41;36m                 ARH-PROJECT                \E[0m"
+echo -e "\e[36m╘════════════════════════════════════════════╛\033[0m"
+read -p "     Select From Options [1-69 or x] :  " xmenu
+case $xmenu in
+
+ 1)
+clear
+echo "YOOUR SECRET KEY : $(cat /root/api/key.txt)"
+;;
+2)
+cat /etc/xray/domain
+;;
+3)
+curl -s ipinfo.io/ip
+;;
+4)
+restart-xray
+;;
+5)
+certv2ray
+;;
+6)
+reboot
+;;
+7)
+exit
+;;
+8)
+cat /root/log-install.txt
+;;
+9)
+change-domain
+;;
+10)
+passwd
+;;
+
+*)
+echo "Input The Correct Number !"
+;;
+esac

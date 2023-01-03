@@ -1,0 +1,11 @@
+#!/bin/bash
+# ==========================================
+
+read -rp "INPUT YOUR DOMAIN : " domain
+printf %s $domain > domain
+printf %s $domain > /etc/xray/domain
+certv2ray
+restart-xray
+echo " Reboot 15 Sec"
+sleep 15
+reboot
